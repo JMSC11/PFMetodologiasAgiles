@@ -2,38 +2,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <title>Index</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlogDeCafé</title>
+    <meta name="description" content="Página web de blog de café">
+
+    <!-- Prefetch -->
+    <link rel="prefetch" href="nosotros.html" as="document">
+
+    <!-- Preload -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href=" {% static 'css/normalize.css'%} ">
+    <link rel="stylesheet" href=" {% static 'css/styles.css'%} ">
+
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap"  crossorigin="crossorigin" as="font">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        header {
+            background-image: url("{% static 'img/banner.webp' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
-  
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col card bg-lihgt">
-        <h1>chupala misa</h1>
-        <h2>Chupala diego</h2>
-        <h3>Viva México</h3>
-      </div>
-    </div>
 
-    <div class="row justify-content-center">
-      <div class="col-6 mt-5 card bg-info">
-        <table class="table">
-          <tr>
-            <th>Nombre</th>
-            <th>Apellido</th>
-          </tr>
-          <tr>
-            <td>diego</td>
-            <td>Gonzalez</td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
+    <header class="header contenedor mt-5 ">
 
+        <div class="contenedor">
+            <div class="barra">
+                <a class="logo" href="index.html">
+                    <h1 class="logo__nombre no-margin centrar-texto">e-<span class="logo__bold">Coffee</span> Market</h1>
+                </a>
+
+                <nav class="navegacion">
+                    <a href="nosotros.html" class="navegacion__enlace">Crear Cuenta</a>
+                    <a href="cursos.html" class="navegacion__enlace">Iniciar Sesión</a>
+                    <a href="contacto.html" class="navegacion__enlace">Ver Productos</a>
+                </nav>
+            </div>
+        </div>
+
+        <div class="header__texto">
+            <h2 class="no-margin">Despierta tus sentidos con el poderoso elixir del café. </h2>
+            <p class="no-margin">Behind the bean</p>
+        </div>
+    </header>
+
+    
+    <script src="js/modernizr.js"></script>
 </body>
 </html>
