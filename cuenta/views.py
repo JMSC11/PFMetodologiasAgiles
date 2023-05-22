@@ -12,8 +12,7 @@ from django.urls import reverse
 from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .forms import RegistroCuenta
-
-
+from cuenta.Barista import Barista
 # Create your views here.
 
 def index(request):
@@ -23,8 +22,17 @@ def index(request):
 @login_required
 def home(request):
     if request.method == 'GET':
+        usuario = request.user.username
+        if usuario == 'admin':
+            return redirect("/admin/")
+        else:
+            id_user = request.user.id
+            barista = Barista.objects.get(user = id_user)
+            if barista.isBarista == True:
+                 return render(request, 'homebarista.html')
         return render(request, 'home.html')
     
+
 def register(request):
     data = {
         'form' : CustomUserCreationForm()
