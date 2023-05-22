@@ -55,7 +55,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Proyecto_Final.urls'
-
+CSRF_TRUSTED_ORIGINS = ['pfmetodologiasagiles-production.up.railway.app']
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
