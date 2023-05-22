@@ -22,6 +22,10 @@
         <p class=" nav-link text-white fs-2"> Usuario:   {{request.user.username}}</p> 
       </li>
       <li class = "nav-item"> 
+        <a class="text-white fs-2 nav-link" href="{% url '#' %}">Ver Eventos</a>
+        <p class=" nav-link text-white fs-2"> Ver:   {{request.user.username}}</p> 
+      </li>
+      <li class = "nav-item">
         {% if request.user.is_authenticated %}
         <a class="text-white fs-2 nav-link" href="{% url 'exit' %}">Cerrar Sesión</a>
       {% endif %}
@@ -64,7 +68,6 @@
     <div class = "container-sm mt-5">
       <div class = "card">
         <h1 class = "text-center">Portal Base </h1>
-        base
       </div>
     </div>
 </body>
