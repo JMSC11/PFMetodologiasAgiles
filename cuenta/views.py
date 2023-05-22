@@ -27,10 +27,12 @@ def home(request):
             return redirect("/admin/")
         else:
             id_user = request.user.id
-            barista = Barista.objects.get(user = id_user)
-            if barista.isBarista == True:
-                 return render(request, 'homebarista.html')
-        return render(request, 'home.html')
+            try:
+                barista = Barista.objects.get(user = id_user)
+                if barista.isBarista == True:
+                    return render(request, 'homebarista.html')
+            except:
+                return render(request, 'home.html')
     
 
 def register(request):
