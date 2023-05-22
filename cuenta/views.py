@@ -19,11 +19,12 @@ from .forms import RegistroCuenta
 def index(request):
     if request.method == 'GET':
         return render(request, 'index.html')
-
+    
+@login_required
 def home(request):
     if request.method == 'GET':
         return render(request, 'home.html')
-
+    
 def register(request):
     data = {
         'form' : CustomUserCreationForm()
@@ -38,7 +39,7 @@ def register(request):
                 user_creation_form.save()
                 #user = authenticate(username=user_creation_form.cleaned_data['username'], password = user_creation_form.cleaned_data['password1'])
                 #login(request, user)
-                return redirect('index')
+                return redirect('home')
         except Exception as e:
 
             logging.exception(e)
