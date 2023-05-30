@@ -24,7 +24,6 @@ body {
   font-family: var(--fuenteParrafos);
   font-size: 1.6rem;
   line-height: 2;
-  background-color: #2A2D34;
 }
 
 /** Globales **/
@@ -111,8 +110,12 @@ img {
 }
 
 .logo {
-  color: var(--blanco);
+  color: var(--gris);
 
+}
+
+.logo:hover {
+  color: var(--blanco);
 }
 
 .logo__nombre {
