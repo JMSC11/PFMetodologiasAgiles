@@ -25,10 +25,10 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active ms-5">
-          <a class="nav-link fs-1" href="#">Ver Productos</a>
+          <a class="nav-link fs-1" href="{% url 'lista_eventos' %}">Ver Productos</a>
         </li>
         <li class="nav-item active ms-5">
-          <a class="nav-link fs-1" href="{% url 'lista_eventos' %}">Ver Eventos</a>
+          <a class="nav-link fs-1" href="#">Ver Eventos</a>
         </li>        
         <!-- Otros elementos del menú -->
   
@@ -56,30 +56,30 @@
             <thead>
               <tr>
                 <th scope="col-3">#</th>
-                <th scope="col-3">Articulo</th>
-                <th scope="col-3">Precio</th>
-                <th scope="col-3">Cantidad a pedir</th>
+                <th scope="col-3">Evento</th>
+                <th scope="col-3">Descripcion</th>
+                <th scope="col-3">Fecha</th>
+                <th scope="col-3"></th>
 
               </tr>
             </thead>
             <tbody>
               <!-- Agregar formulario -->
-              {% for item in articulos_venta %}
+              {% for item in lista_eventos %}
                 <tr>
                   <th class="col-3" scope="row">{{item.id}}</th>
                   <td class="col-3">{{item.nombre}}</td>
-                  <td class="col-3">{{item.precio}} </td>
+                  <td class="col-3">{{item.descripcion}} </td>
+                  <td class="col-3">{{item.fecha}} </td>
                   <td class="col-3"> 
-                      <input type="number" class="form-control-sm" name = {{item.id}}>
+                    <button class="btn btn-success btn-lg fs-2">Generar reserva </button>
                   </td>
                   
                 </tr>
                 {%endfor%}
               </tbody>
             </table>
-            <div class="d-grid gap-2 col-6 mx-auto">
-              <button class="btn btn-success btn-lg fs-2">Generar Pedido </button>
-            </div>
+
       </div>
     </div>
 

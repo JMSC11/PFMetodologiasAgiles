@@ -13,6 +13,8 @@ from django.contrib import messages
 from .forms import CustomUserCreationForm
 from .forms import RegistroCuenta
 from cuenta.Barista import Barista
+from Productos.Articulos_Venta import Articulos_Venta
+from Productos.Eventos import Eventos
 # Create your views here.
 
 def index(request):
@@ -23,6 +25,7 @@ def index(request):
 def home(request):
     if request.method == 'GET':
         usuario = request.user.username
+        articulos_venta = Articulos_Venta.objects.all()
         if usuario == 'admin':
             return redirect("/admin/")
         else:
@@ -32,7 +35,7 @@ def home(request):
                 if barista.isBarista == True:
                     return render(request, 'homebarista.html')
             except:
-                return render(request, 'home.html')
+                return render(request, 'home.html', {'articulos_venta' : articulos_venta})
     
 
 def register(request):
@@ -61,3 +64,6 @@ def exit(request):
     logout(request)
     return redirect('index')
 
+def lista_eventos(request):
+    lista_eventos = Eventos.objects.all()
+    return render(request, 'lista_eventos.html', {'lista_eventos' : lista_eventos})

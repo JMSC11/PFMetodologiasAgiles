@@ -5,4 +5,6 @@ class Barista(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     isBarista = True
 def __str__(self):
-    return self.user.username
+    user = self.user
+    username = user.username
+    return f"{username}"
