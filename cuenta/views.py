@@ -15,6 +15,7 @@ from .forms import RegistroCuenta
 from cuenta.Barista import Barista
 from Productos.Articulos_Venta import Articulos_Venta
 from Productos.Eventos import Eventos
+from Productos.views import nuevo_Pedido
 # Create your views here.
 
 def index(request):
@@ -23,20 +24,33 @@ def index(request):
     
 @login_required
 def home(request):
+    usuario = request.user.username
+    id_user = request.user.id
     if request.method == 'GET':
-        usuario = request.user.username
         articulos_venta = Articulos_Venta.objects.all()
         if usuario == 'admin':
             return redirect("/admin/")
         else:
-            id_user = request.user.id
             try:
                 barista = Barista.objects.get(user = id_user)
                 if barista.isBarista == True:
                     return render(request, 'homebarista.html')
             except:
                 return render(request, 'home.html', {'articulos_venta' : articulos_venta})
-    
+    else: #request.method == 'POST'
+        print("Presione boton")
+        print(request.POST)
+        try:
+            barista = Barista.objects.get(user = id_user)
+            if barista.isBarista == True:
+                print("accion del barista")           
+        except:
+            # Manejar otras excepciones
+            nuevo_Pedido(request)
+                
+        return render(request, 'home.html')
+        
+        
 
 def register(request):
     data = {
@@ -54,10 +68,8 @@ def register(request):
                 #login(request, user)
                 return redirect('home')
         except Exception as e:
-
             logging.exception(e)
             print(e)
-
             return HttpResponse('Error al agregar proyecto 3')
 
 def exit(request):
@@ -67,3 +79,4 @@ def exit(request):
 def lista_eventos(request):
     lista_eventos = Eventos.objects.all()
     return render(request, 'lista_eventos.html', {'lista_eventos' : lista_eventos})
+

@@ -6,6 +6,6 @@ from . import views
 
 
 urlpatterns = [
-    #path('', views.index, name='index'),   
+    #path('Nueva_Reserva/<id>', views.Nueva_Reserva, name='nueva_reserva'),   
 
 ]
