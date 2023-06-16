@@ -26,8 +26,8 @@ def index(request):
 def home(request):
     usuario = request.user.username
     id_user = request.user.id
+    articulos_venta = Articulos_Venta.objects.all()
     if request.method == 'GET':
-        articulos_venta = Articulos_Venta.objects.all()
         if usuario == 'admin':
             return redirect("/admin/")
         else:
@@ -48,7 +48,7 @@ def home(request):
             # Manejar otras excepciones
             nuevo_Pedido(request)
                 
-        return render(request, 'home.html')
+        return render(request, 'home.html',{'articulos_venta' : articulos_venta})
         
         
 
@@ -77,6 +77,8 @@ def exit(request):
     return redirect('index')
 
 def lista_eventos(request):
-    lista_eventos = Eventos.objects.all()
-    return render(request, 'lista_eventos.html', {'lista_eventos' : lista_eventos})
-
+    if request.method == 'GET':
+        lista_eventos = Eventos.objects.all()
+        return render(request, 'lista_eventos.html', {'lista_eventos' : lista_eventos})
+    else:
+        print("algo")

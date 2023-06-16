@@ -6,7 +6,8 @@ from django.contrib.auth.decorators import login_required
 from cuenta.Barista import Barista
 from Productos.Articulos_Venta import Articulos_Venta
 from Productos.Pedidos import Pedidos
-
+from Productos.Reservas import Reservas
+from Productos.Eventos import Eventos
 
 # Create your views here.
 
@@ -43,21 +44,45 @@ def getTotal(pedido):
     return total
 
 
-"""TODO: Backend para agregar una nueva reservación.
-    @user: cliente
-    PASO 1. Modificar el html "lista_eventos" - ve a lista_eventos
-    PASO 2. Crear una funcion en éste archivo DE NOMBRE Nueva_Reserva
+def Nueva_Reserva(request, id):
+    #    evento = models.ForeignKey(Eventos, on_delete= models.CASCADE)
+    #is_active = models.BooleanField()
+    #id_cliente = models.ForeignKey(User, on_delete = models.CASCADE)
+    evento = Eventos.objects.get(pk = id)
+    user = request.user
+    print(user)
+    reserva = Reservas.objects.create(id_cliente = user,
+                                      evento = evento,
+                                      is_active = True)
+    reserva.save()
+    lista_eventos = Eventos.objects.all()
+    return render(request, 'lista_eventos.html', {'lista_eventos' : lista_eventos})
+    #nueva_reserva = Reservas.objects.create(id)
 
-    def Nueva_Reserva(request, id):
-        if metodo es get:
-        
-        else
-            ¿que se necesita?
-            id_cliente = request.user
-            id_evento = id
-            is_active = True
+def Ver_Pedidos(request): 
+    user = request.user
+    lista_pedidos = Pedidos.objects.filter(id_cliente=user, is_active = True)
+    print(lista_pedidos)
+    return render(request, 'VerPedidos.html', {'lista_pedidos' : lista_pedidos})
 
-            reserva = Reservas.objects.create(id_cliente, .....)
-            reserva.save
-            return render(request, 'home.html')
-"""
+def Cancelar_Pedido(request, id):
+    user = request.user
+    pedido = Pedidos.objects.get(pk = id)
+    pedido.is_active = False
+    pedido.save()
+    lista_pedidos = Pedidos.objects.filter(id_cliente=user, is_active = True)    
+    return render(request, 'VerPedidos.html', {'lista_pedidos' : lista_pedidos})
+
+def Ver_Reservas(request): 
+    user = request.user
+    lista_reservas = Reservas.objects.filter(id_cliente=user, is_active = True)
+    print(lista_reservas)
+    return render(request, 'ver_reserva_cliente.html', {'lista_reservas' : lista_reservas})
+
+def Cancelar_Reserva(request, id):
+    user = request.user
+    reserva = Reservas.objects.get(pk = id)
+    reserva.is_active = False
+    reserva.save()
+    lista_reservas = Reservas.objects.filter(id_cliente=user, is_active = True)    
+    return render(request, 'ver_reserva_cliente.html', {'lista_reservas' : lista_reservas})
