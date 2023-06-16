@@ -28,13 +28,13 @@
           <a class="nav-link fs-3" href="{% url 'home' %}">Ver Productos</a>
         </li>
         <li class="nav-item active ms-5">
-          <a class="nav-link fs-3" href="#">Ver Eventos</a>
+          <a class="nav-link fs-3" href="{% url 'lista_eventos' %}">Ver Eventos</a>
         </li>     
         <li class="nav-item active ms-5">
-          <a class="nav-link fs-3" href="#">Ver Pedidos</a>
+          <a class="nav-link fs-3" href="{% url 'Ver_Pedidos' %}">Ver Pedidos</a>
         </li> 
         <li class="nav-item active ms-5">
-          <a class="nav-link fs-3" href="#">Ver Reservas</a>
+          <a class="nav-link fs-3" href="{% url 'Ver_Reservas' %}">Ver Reservas</a>
         </li>    
         <!-- Otros elementos del menú -->
   
@@ -58,33 +58,30 @@
         <h1 class = "text-center">Menú </h1>
 
 
-          <table class="table">
-            <thead>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col-4">ID Pedido</th>
+              <th scope="col-4">Total </th>    
+              <th scope="col-4">Acciones </th>       
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Agregar formulario -->
+            {% for item in lista_pedidos %} 
+            {% if item.is_active %}
               <tr>
-                <th scope="col-1">#</th>
-                <th scope="col-3">Evento</th>
-                <th scope="col-5">Descripcion</th>
-                <th scope="col-3">Fecha</th>
-                <th scope="col-3"></th>
-
+                <th class="col-4" scope="row">{{item}}</th>
+                <td class="col-4">{{item.total}}</td>
+                <td class="col-4"> 
+                  <a class="btn btn-danger" href="{% url 'Cancelar_Pedido' item.id %}">Cancelar!</a>
+                </td>
+                
               </tr>
-            </thead>
-            <tbody>
-              <!-- Agregar formulario 
-              {% for item in lista_eventos %}-->
-                <tr>
-                  <th class="col-1" scope="row">{{item.id}}</th>
-                  <td class="col-3">{{item.nombre}}</td>
-                  <td class="col-5">{{item.descripcion}} </td>
-                  <td class="col-3">{{item.fecha}} </td>
-                  <td class="col-3"> 
-                    <button class="btn btn-success btn-lg fs-2">Generar reserva </button>
-                  </td>
-                  
-                </tr>
-                <!--{%endfor%}-->
-              </tbody>
-            </table>
+              {%endif%}
+              {%endfor%}
+            </tbody>
+          </table>
 
       </div>
     </div>
